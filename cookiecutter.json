@@ -1,0 +1,49 @@
+{
+    "project": {
+        "name": "Project",
+        "slug": "project",
+        "admin": {
+            "user": "project",
+            "password": "",
+            "email": ""
+        },
+        "secret_key": ""
+    },
+    "year": "2017",
+    "version": "0.0.1",
+    "websitedomains": ["*"],
+    "websitedomains_str": "*",
+    "site_domain": "example.com",
+    "db_url": "",
+    "open_source_license": ["MIT", "BSD", "GPLv3", "Apache Software License 2.0", "Not open source"],
+    "vcs": ["git", "hg"],
+    "cms": "n",
+    "user": {
+        "email": "info@django.group",
+        "company_name": "",
+        "vat_id": "",
+        "first_name": "",
+        "last_name": "",
+        "full_name": "",
+        "street": "",
+        "postal_code": "",
+        "place": "",
+        "country": {
+            "code": "",
+            "name": ""
+        }
+    },
+    "systemuser": {
+        "name": "test"
+    },
+    "db": {
+        "dbms": "postgres",
+        "name": "test",
+        "user": "",
+        "password": ""
+    },
+    "port": {
+        "nginx": 65000,
+        "dev": 65001
+    }
+}

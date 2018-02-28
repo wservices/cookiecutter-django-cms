@@ -1,0 +1,14 @@
+{% raw %}{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{{ site_name }}{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h1>{% trans 'Django successfully installed' %}</h1>
+    </div>
+  </div>
+</div>
+{% endblock %}{% endraw %}

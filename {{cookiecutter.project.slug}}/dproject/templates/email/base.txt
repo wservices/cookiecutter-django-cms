@@ -1,0 +1,14 @@
+{% raw %}{% load i18n %}
+
+{% autoescape off %}
+{% if admin_name %}{% trans 'Dear ' %} {{ admin_name }},
+{% elif user.fist_name or user.last_name %}{% trans 'Dear ' %}{{ user.first_name }} {{ user.last_name }},{% else %}{% trans 'Dear ladies and gentlemen' %},
+{% endif %}
+{% block content %}{% endblock %}
+------------{% if admin_name %}{% comment %}
+{% trans 'Yours sincerely' %},
+{% trans 'Django website system' %}
+{% endcomment %}{% else %}{% trans 'Yours sincerely' %}
+{% blocktrans with site_name=site.name %}The {{ site_name }} team{% endblocktrans %}
+{% endif %}
+{% endautoescape %}{% endraw %}

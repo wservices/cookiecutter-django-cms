@@ -1,0 +1,1 @@
+~/.virtualenvs/{{ cookiecutter.project.slug }}/bin/python manage.py runserver 127.0.0.1:{{ cookiecutter.port.dev }} --settings=config.settings.local

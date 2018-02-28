@@ -1,0 +1,132 @@
+{% raw %}{% load staticfiles sekizai_tags i18n menu_tags cms_tags %}<!DOCTYPE html>
+
+{% get_current_language as LANGUAGE_CODE %}
+{% get_available_languages as LANGUAGES %}
+
+<html lang="{{ LANGUAGE_CODE }}">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% page_attribute "page_title" %}</title>
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+
+    <!-- Third-party CSS libraries go here -->
+    <link href="{% static 'bootstrap3/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'bootstrap3/css/bootstrap-dialog.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/bootstrap-datetimepicker.min.css' %}" rel="stylesheet">
+    <link href="{% static 'font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
+    {% render_block "css" %}
+
+    <!-- Project specific CSS -->
+    {% block css %}
+    <link href="{% static 'css/project.css' %}" rel="stylesheet">
+    {% endblock %}
+  </head>
+
+  <body>
+    {% cms_toolbar %}
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand logo" href="/">
+            {% endraw %}{{cookiecutter.project.name}}{% raw %}
+          </a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li><a href="/"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a></li>
+            {% show_menu 0 100 100 100 "bs3-menu.html" %}
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ LANGUAGE_CODE }}</a>
+              <ul class="dropdown-menu" aria-labelledby="dropdown02">{% for lang in LANGUAGES %}
+                <form id="formsetLang{{ lang.0 }}" action="{% url 'set_language' %}" method="POST">
+                  {% csrf_token %}
+                  <input type="hidden" name="language" value="{{ lang.0 }}" />
+                </form>
+                <li><a class="language_changer" id="{{ lang.0 }}" href="#">{{ lang.1 }}</a></li>
+              {% endfor %}
+              </ul>
+            </li>
+          </ul>
+          <form class="navbar-form navbar-left" action="/search/" method="GET">
+            <div class="input-group">
+              <input type="text" class="form-control" id ="input-search" name="q" placeholder="{% trans 'Search on the site' %}" value="{{ search_word }}">
+              <span class="input-group-btn">
+                <button type="submit" class="btn btn-default"><i class="fa fa-search search-icon"></i></button>
+              </span>
+            </div>
+          </form>
+          <ul class="nav navbar-nav navbar-right">
+            {% if request.user.is_authenticated %}
+              <li class="dropdown">
+                <a class="dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <span><i class="fa fa-user fa-fw" aria-hidden="true"></i>{{ request.user }}</span>
+                  <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="dropdown01">
+                  <li><a class="dropdown-item" role="presentation" href="#">{% trans 'Profile' %}</a></li>
+                  <li><a class="dropdown-item" role="presentation" href="{% url 'admin:index' %}">{% trans 'Admin' %}</a></li>
+                  <li><a class="dropdown-item" role="presentation" href="{% url 'logout' %}">{% trans 'Log out' %}</a></li>
+                </ul>
+              </li>
+            {% else %}
+              <li><a href="{% url 'login' %}">{% trans 'Log in' %}</a></li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+	  </nav>
+
+    <div class="content">
+      {% if messages %}
+        <div class="container">
+          {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      {% placeholder "content" %}
+      {% block content %}
+      {% endblock content %}
+    </div>
+
+    <footer class="footer">
+      <nav class="navbar navbar-default navbar-fixed-bottom">
+        <div class="container-fluid">
+          <div class="container">
+            <div class="navbar-header">
+              <a class="navbar-brand" href="https://djangoeurope.com/">{% trans 'Installed by' %} <b>djangoeurope</b> {% trans 'one click installer' %}</a>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a>Version {% endraw %}{{cookiecutter.version}}{% raw %}</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </footer>
+
+    <!-- Third-party javascript libraries go here -->
+    <script src="{% static 'jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'jquery/js.cookie.js' %}"></script>
+    <script src="{% static 'bootstrap3/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'bootstrap3/js/bootstrap-dialog.min.js' %}"></script>
+    <script src="{% static 'js/moment-with-locales.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap-datetimepicker.min.js' %}"></script>
+    {% render_block "js" %}
+
+    <!-- Project specific javascript -->
+    {% block javascript %}
+    <script src="{% static 'js/project.js' %}"></script>
+    {% endblock javascript %}
+      
+  </body>
+</html>
+{% endraw %}
