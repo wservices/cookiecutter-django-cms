@@ -105,7 +105,7 @@ SERVER_EMAIL = env('DJANGO_SERVER_EMAIL', default=DEFAULT_FROM_EMAIL)
 # ------------------------------------------------------------------------------
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#admins
 ADMINS = (
-    ("""{{cookiecutter.user.full_name}}""", '{{cookiecutter.user.email}}'),
+    #("""{{cookiecutter.user.full_name}}""", '{{cookiecutter.user.email}}'),
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#managers
