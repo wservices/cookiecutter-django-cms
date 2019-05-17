@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-28 03:51+0000\n"
+"POT-Creation-Date: 2019-05-17 08:38+0000\n"
 "PO-Revision-Date: 2017-10-11 08:40+0000\n"
 "Last-Translator: Pascal Bader <info@wservices.ch>\n"
 "Language-Team: LANGUAGE <info@wservices.ch>\n"
@@ -47,77 +47,109 @@ msgid ""
 "email and should be fixed shortly. Thanks for your patience."
 msgstr ""
 
-#: dproject/templates/about.html:13
-msgid "Imprint"
-msgstr "অঙ্কিত করা"
-
-#: dproject/templates/base.html:60
-msgid "Search on the site"
-msgstr "সাইট অনুসন্ধান করুন"
-
-#: dproject/templates/base.html:74
+#: dproject/templates/base.html:58
 msgid "Profile"
 msgstr "প্রোফাইলের"
 
-#: dproject/templates/base.html:75
+#: dproject/templates/base.html:59
 msgid "Admin"
 msgstr ""
 
-#: dproject/templates/base.html:76
+#: dproject/templates/base.html:60
 msgid "Log out"
 msgstr ""
 
-#: dproject/templates/base.html:80 dproject/templates/registration/login.html:5
-#: dproject/templates/registration/login.html:12
-#: dproject/templates/registration/login.html:18
+#: dproject/templates/base.html:64 dproject/templates/registration/login.html:5
+#: dproject/templates/registration/login.html:9
+#: dproject/templates/registration/login.html:15
+#: dproject/templates/registration/password_reset_complete.html:11
 msgid "Log in"
 msgstr ""
 
-#: dproject/templates/base.html:106
+#: dproject/templates/base.html:89
 msgid "Installed by"
 msgstr "দ্বারা ইনস্টল"
 
-#: dproject/templates/base.html:106
+#: dproject/templates/base.html:89
 msgid "one click installer"
-msgstr ""
+msgstr "এক ক্লিক ইনস্টলার"
 
-#: dproject/templates/email/base.html:68 dproject/templates/email/base.txt:4
-#: dproject/templates/email/base.txt:5
+#: dproject/templates/email/base.html:63 dproject/templates/email/base.txt:1
 msgid "Dear "
 msgstr ""
 
-#: dproject/templates/email/base.html:73 dproject/templates/email/base.txt:11
+#: dproject/templates/email/base.html:66 dproject/templates/email/base.txt:3
 msgid "Yours sincerely"
 msgstr ""
 
-#: dproject/templates/email/base.html:74 dproject/templates/email/base.txt:12
+#: dproject/templates/email/base.html:67 dproject/templates/email/base.txt:4
 #, python-format
 msgid "The %(site_name)s team"
-msgstr ""
+msgstr "%(site_name)s দল"
 
-#: dproject/templates/email/base.txt:5
-msgid "Dear ladies and gentlemen"
-msgstr ""
-
-#: dproject/templates/index.html:10
+#: dproject/templates/index.html:8
 msgid "Django successfully installed"
 msgstr "Django সফলভাবে ইনস্টল"
 
-#: dproject/templates/registration/logged_out.html:4
-msgid "Home"
-msgstr ""
-
-#: dproject/templates/registration/logged_out.html:10
+#: dproject/templates/registration/logged_out.html:5
 msgid "Logged out"
 msgstr ""
 
-#: dproject/templates/registration/logged_out.html:11
-msgid "Thanks for spending some quality time with the Web site today."
-msgstr ""
-
-#: dproject/templates/registration/logged_out.html:12
+#: dproject/templates/registration/logged_out.html:6
 msgid "Log in again"
 msgstr ""
 
-#~ msgid "About"
+#: dproject/templates/registration/password_reset_complete.html:8
+msgid "Your password has been set.  You may go ahead and log in now."
+msgstr ""
+
+#: dproject/templates/registration/password_reset_confirm.html:10
+msgid ""
+"Please enter your new password twice so we can verify you typed it in "
+"correctly."
+msgstr ""
+
+#: dproject/templates/registration/password_reset_confirm.html:14
+msgid "Change my password"
+msgstr ""
+
+#: dproject/templates/registration/password_reset_confirm.html:18
+msgid ""
+"The password reset link was invalid, possibly because it has already been "
+"used.  Please request a new password reset."
+msgstr ""
+
+#: dproject/templates/registration/password_reset_confirm.html:20
+msgid "Request a new password"
+msgstr "একটি নতুন পাসওয়ার্ড অনুরোধ করুন"
+
+#: dproject/templates/registration/password_reset_done.html:8
+msgid ""
+"We've emailed you instructions for setting your password, if an account "
+"exists with the email you entered. You should receive them shortly."
+msgstr ""
+
+#: dproject/templates/registration/password_reset_done.html:9
+msgid ""
+"If you don't receive an email, please make sure you've entered the address "
+"you registered with, and check your spam folder."
+msgstr ""
+
+#: dproject/templates/registration/password_reset_form.html:9
+msgid ""
+"Forgotten your password? Enter your email address below, and we'll email "
+"instructions for setting a new one."
+msgstr ""
+
+#: dproject/templates/registration/password_reset_form.html:14
+msgid "Reset my password"
+msgstr ""
+
+#~ msgid "Imprint"
+#~ msgstr "অঙ্কিত করা"
+
+#~ msgid "About us"
 #~ msgstr "আমাদের সম্পর্কে"
+
+#~ msgid "Search on the site"
+#~ msgstr "সাইট অনুসন্ধান করুন"

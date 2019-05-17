@@ -16,16 +16,16 @@ $(document).ready(function() {
     e.preventDefault();
 
     var lang = $( this ).attr('id');
-    Cookies.set('django_language', lang, { expires: 14, path: '/' });
+    Cookies.set('django_language', lang, { expires: 7, path: '/' });
 
     var form = document.getElementById('formsetLang'+lang);
     $.ajax({
       url: $(form).attr('action'),
       method: "POST",
       data : $(form).serialize(),
-      success : function (response){
-        location.reload();
-      },
+      success : function (data){
+        window.location='.';
+      }
     });
     return false;
   });

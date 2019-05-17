@@ -9,10 +9,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/dev/ref/settings/
 """
 
+from django.utils.translation import ugettext_lazy as _
 import environ
 
 ROOT_DIR = environ.Path(__file__) - 3  # (base_dir/config/settings/common.py - 3 = base_dir/)
-APPS_DIR = ROOT_DIR.path('dproject')
+PROJ_DIR = ROOT_DIR.path('dproject')
 
 env = environ.Env()
 env.read_env()
@@ -41,7 +42,6 @@ DJANGO_APPS = (
 
 THIRD_PARTY_APPS = (
     'crispy_forms',
-    'cmsplugin_cascade',
     'cms',
     'menus',
     'treebeard',
@@ -50,15 +50,30 @@ THIRD_PARTY_APPS = (
     'easy_thumbnails',
     'mptt',
     'djangocms_text_ckeditor',
-    #'djangocms_link',
-    #'djangocms_file',
-    #'djangocms_picture',
+    'djangocms_icon',
+    'djangocms_link',
+    'djangocms_file',
+    'djangocms_picture',
     'djangocms_attributes_field',
     'djangocms_video',
-    #'djangocms_googlemap',
-    'djangocms_snippet',
-    #'djangocms_style',
-    #'djangocms_column',
+    'djangocms_googlemap',
+    #'djangocms_snippet',
+    'djangocms_style',
+    'djangocms_bootstrap4',
+    'djangocms_bootstrap4.contrib.bootstrap4_alerts',
+    'djangocms_bootstrap4.contrib.bootstrap4_badge',
+    'djangocms_bootstrap4.contrib.bootstrap4_card',
+    'djangocms_bootstrap4.contrib.bootstrap4_carousel',
+    'djangocms_bootstrap4.contrib.bootstrap4_collapse',
+    'djangocms_bootstrap4.contrib.bootstrap4_content',
+    'djangocms_bootstrap4.contrib.bootstrap4_grid',
+    'djangocms_bootstrap4.contrib.bootstrap4_jumbotron',
+    'djangocms_bootstrap4.contrib.bootstrap4_link',
+    'djangocms_bootstrap4.contrib.bootstrap4_listgroup',
+    'djangocms_bootstrap4.contrib.bootstrap4_media',
+    'djangocms_bootstrap4.contrib.bootstrap4_picture',
+    'djangocms_bootstrap4.contrib.bootstrap4_tabs',
+    'djangocms_bootstrap4.contrib.bootstrap4_utilities',
 )
 
 # Apps specific for this project go here.
@@ -78,6 +93,7 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'django.contrib.sites.middleware.CurrentSiteMiddleware',
     #'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'cms.middleware.utils.ApphookReloadMiddleware',
     'cms.middleware.user.CurrentUserMiddleware',
@@ -118,7 +134,8 @@ DATABASES = {
     'default': env.db('DATABASE_URL', default='{{cookiecutter.db.dbms}}://{{cookiecutter.db.user}}@localhost/{{cookiecutter.db.name}}'),
 }
 #DATABASES['default']['ATOMIC_REQUESTS'] = True
-#DATABASES['default']['OPTIONS'] = {'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"}
+if DATABASES['default']['ENGINE'] == 'django.db.backends.mysql':
+    DATABASES['default']['OPTIONS'] = {'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"}
 
 
 # GENERAL CONFIGURATION
@@ -157,7 +174,7 @@ SITE_ID = 1
 USE_I18N = True
 
 LOCALE_PATHS = [
-    APPS_DIR('locale'),
+    PROJ_DIR('locale'),
 ]
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#use-l10n
@@ -175,7 +192,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-dirs
         'DIRS': [
-            str(APPS_DIR.path('templates')),
+            str(PROJ_DIR.path('templates')),
         ],
         'OPTIONS': {
             # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-debug
@@ -198,30 +215,26 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'cms.context_processors.cms_settings',
                 'sekizai.context_processors.sekizai',
-                #'dproject.context_processors.site_processor',
             ],
-            #'libraries': {
-            #    'sorl_thumbnail': 'sorl.thumbnail.templatetags.thumbnail',
-            #},
+            'libraries': {
+                'sorl_thumbnail': 'sorl.thumbnail.templatetags.thumbnail',
+            },
         },
     },
 ]
 
-# See: http://django-crispy-forms.readthedocs.io/en/latest/install.html#template-packs
-CRISPY_TEMPLATE_PACK = 'bootstrap3'
-
 # STATIC FILE CONFIGURATION
 # ------------------------------------------------------------------------------
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#static-root
-STATIC_ROOT = str(APPS_DIR('staticfiles'))
-FILE_UPLOAD_TEMP_DIR = str(ROOT_DIR('tmp'))
+STATIC_ROOT = str(PROJ_DIR('staticfiles'))
+FILE_UPLOAD_TEMP_DIR = str(PROJ_DIR('tmp'))
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#static-url
 STATIC_URL = '/static/'
 
 # See: https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#std:setting-STATICFILES_DIRS
 STATICFILES_DIRS = (
-    str(APPS_DIR.path('static')),
+    str(PROJ_DIR.path('static')),
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#staticfiles-finders
@@ -233,7 +246,7 @@ STATICFILES_FINDERS = (
 # MEDIA CONFIGURATION
 # ------------------------------------------------------------------------------
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#media-root
-MEDIA_ROOT = str(APPS_DIR('media'))
+MEDIA_ROOT = str(PROJ_DIR('media'))
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#media-url
 MEDIA_URL = '/media/'
@@ -241,6 +254,9 @@ MEDIA_URL = '/media/'
 # URL Configuration
 # ------------------------------------------------------------------------------
 ROOT_URLCONF = 'config.urls'
+LOGIN_URL = '/login/'
+LOGOUT_URL = '/logout/'
+LOGIN_REDIRECT_URL = '/'
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#wsgi-application
 WSGI_APPLICATION = 'config.wsgi.application'
@@ -265,76 +281,14 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# AUTHENTICATION CONFIGURATION
-# ------------------------------------------------------------------------------
-#AUTHENTICATION_BACKENDS = (
-#    'django.contrib.auth.backends.ModelBackend',
-#    'allauth.account.auth_backends.AuthenticationBackend',
-#)
-
-# Some really nice defaults
-ACCOUNT_AUTHENTICATION_METHOD = 'username'
-ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
-
-ACCOUNT_ALLOW_REGISTRATION = env.bool('DJANGO_ACCOUNT_ALLOW_REGISTRATION', True)
-#ACCOUNT_ADAPTER = 'dproject.users.adapters.AccountAdapter'
-#SOCIALACCOUNT_ADAPTER = 'dproject.users.adapters.SocialAccountAdapter'
-
-# Custom user app defaults
-# Select the correct user model
-#AUTH_USER_MODEL = 'users.User'
-LOGIN_URL = '/login/'
-LOGOUT_URL = '/logout/'
-LOGIN_REDIRECT_URL = '/'
-
-# SLUGLIFIER
-AUTOSLUG_SLUGIFY_FUNCTION = 'slugify.slugify'
-
-# CMS pre configuration
-# ------------------------------------------------------------------------------
-CMS_TEMPLATES = [
-    ('base.html', 'Base template'),
-]
-
-CMS_PERMISSION = True
-
-CMSPLUGIN_CASCADE_PLUGINS = ('cmsplugin_cascade.bootstrap3', 'cmsplugin_cascade.link')
-
-CMS_PLACEHOLDER_CONF = {
-    'content': {
-        'parent_classes': {'BootstrapContainerPlugin': None,},
-    },
-}
-
-CMS_PLACEHOLDER_CONF = {
-    'plugins': ['BootstrapContainerPlugin'],
-    'text_only_plugins': ['TextLinkPlugin'],
-    'parent_classes': {'BootstrapContainerPlugin': None},
-    'glossary': {
-        'breakpoints': ['xs', 'sm', 'md', 'lg'],
-        'container_max_widths': {'xs': 750, 'sm': 750, 'md': 970, 'lg': 1170},
-        'fluid': False,
-        'media_queries': {
-            'xs': ['(max-width: 768px)'],
-            'sm': ['(min-width: 768px)', '(max-width: 992px)'],
-            'md': ['(min-width: 992px)', '(max-width: 1200px)'],
-            'lg': ['(min-width: 1200px)'],
-        },
-    },
-}
-
-CMSPLUGIN_CASCADE = {
-    'alien_plugins': ('SnippetPlugin', 'TextPlugin', 'TilePlugin', 'EventPlugin', 'VideoPlayerPlugin'),
-}
-
 
 # Your common stuff: Below this line define 3rd party library settings
 # ------------------------------------------------------------------------------
 #THUMBNAIL_ENGINE = 'sorl.thumbnail.engines.pgmagick_engine.Engine' # ZeroDivision error
+THUMBNAIL_DEBUG = DEBUG
 THUMBNAIL_HIGH_RESOLUTION = True
 THUMBNAIL_ALTERNATIVE_RESOLUTIONS = [2]
-THUMBNAIL_QUALITY = 100
+THUMBNAIL_QUALITY = 90
 
 THUMBNAIL_PROCESSORS = (
     'easy_thumbnails.processors.colorspace',
@@ -343,15 +297,15 @@ THUMBNAIL_PROCESSORS = (
     'easy_thumbnails.processors.filters'
 )
 
-THUMBNAIL_DEBUG = DEBUG
+
+# See: http://django-crispy-forms.readthedocs.io/en/latest/install.html#template-packs
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 
-PASSWORD_HASHERS = [
-    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
-    'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
-    'django.contrib.auth.hashers.Argon2PasswordHasher',
-    'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
-    'django.contrib.auth.hashers.BCryptPasswordHasher',
-    'django.contrib.auth.hashers.SHA1PasswordHasher',
+# CMS pre configuration
+# ------------------------------------------------------------------------------
+CMS_TEMPLATES = [
+    ('base.html', 'Base template'),
 ]
 
+CMS_PERMISSION = True

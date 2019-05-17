@@ -1,24 +1,18 @@
-{% raw %}{% extends "base.html" %}
+{% raw %}{% extends "registration/base.html" %}
 {% load i18n %}
 {% load crispy_forms_tags %}
 
 {% block title %}{% trans 'Log in' %}{% endblock %}
 
-{% block content %}
-<div class="container">
-  <div class="row">
-    <div class="col-md-6 col-md-offset-3">
-      <div class="text-center">
-        <h2>{% trans 'Log in' %}</h2>
-      </div>
-      <form class="login" method="post" action=".">
-        {% csrf_token %}
-        {{ form|crispy }}
-        <div class="form-group text-center">
-          <button class="btn btn-primary" type="submit">{% trans "Log in" %}</button>
-        </div>
-      </form>
-    </div>
-  </div>
+{% block inner %}
+<div class="text-center">
+  <h2>{% trans 'Log in' %}</h2>
 </div>
+<form class="login" method="post" action=".">
+  {% csrf_token %}
+  {{ form|crispy }}
+  <div class="form-group text-center">
+    <button class="btn btn-primary" type="submit">{% trans "Log in" %}</button>
+  </div>
+</form>
 {% endblock %}{% endraw %}
