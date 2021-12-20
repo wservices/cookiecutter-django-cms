@@ -60,6 +60,8 @@ node_modules/
 
 # User-uploaded media
 dproject/media/
+dproject/tmp/*
+!dproject/tmp/.keep
 
 # collected static file directory
 staticfiles/
