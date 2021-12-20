@@ -137,6 +137,8 @@ DATABASES = {
 if DATABASES['default']['ENGINE'] == 'django.db.backends.mysql':
     DATABASES['default']['OPTIONS'] = {'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"}
 
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+
 
 # GENERAL CONFIGURATION
 # ------------------------------------------------------------------------------
