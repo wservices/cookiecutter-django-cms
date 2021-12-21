@@ -33,11 +33,11 @@ if 'cms' in settings.INSTALLED_APPS:
     from django.contrib.sitemaps.views import sitemap
     from cms.sitemaps import CMSSitemap
     urlpatterns += [
-        url(r'^sitemap\.xml$', sitemap, {'sitemaps': {'cmspages': CMSSitemap}}),
-        url(r'^', include('cms.urls')),
+        path('sitemap.xml', sitemap, {'sitemaps': {'cmspages': CMSSitemap}}),
+        path('', include('cms.urls')),
     ]
 else:
     urlpatterns += [
-        url(r'^$', TemplateView.as_view(template_name='index.html')),
+        path('', TemplateView.as_view(template_name='index.html'), name='pages-root'),
     ]
 
