@@ -14,5 +14,8 @@
   <div class="form-group text-center">
     <button class="btn btn-primary" type="submit">{% trans "Log in" %}</button>
   </div>
+  <div class="form-group text-center">
+    <a href="{% url 'password_reset' %}">{% translate 'Forgotten your password or username?' %}</a>
+  </div>
 </form>
 {% endblock %}{% endraw %}
