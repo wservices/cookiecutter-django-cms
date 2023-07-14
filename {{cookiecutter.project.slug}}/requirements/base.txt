@@ -54,7 +54,7 @@ reportlab==3.6.3
 requests==2.26.0
 six==1.16.0
 sorl-thumbnail==12.7.0
-sqlparse==0.4.2
+sqlparse==0.4.4
 svglib==1.1.0
 tinycss2==1.1.1
 Unidecode==1.1.2
