@@ -58,5 +58,5 @@ sqlparse==0.4.4
 svglib==1.1.0
 tinycss2==1.1.1
 Unidecode==1.1.2
-urllib3==1.26.7
+urllib3==1.26.18
 webencodings==0.5.1
