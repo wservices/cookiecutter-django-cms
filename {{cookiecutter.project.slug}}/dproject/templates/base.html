@@ -78,8 +78,10 @@
         </div>
       {% endif %}
 
-      {% placeholder "content" %}
       {% block content %}
+        {% placeholder "feature" %}
+        {% placeholder "content" %}
+        {% placeholder "splashbox" %}
       {% endblock content %}
     </main>
 

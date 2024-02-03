@@ -35,14 +35,6 @@ if 'TEMPLATES' in locals():
         if type(t.get('OPTIONS')) is dict:
             TEMPLATES[num]['OPTIONS']['debug'] = DEBUG
 
-
-# SITE CONFIGURATION
-# ------------------------------------------------------------------------------
-# Hosts/domain names that are valid for this site
-# See https://docs.djangoproject.com/en/1.11/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['*'])
-# END SITE CONFIGURATION
-
 INSTALLED_APPS += ('gunicorn', )
 
 

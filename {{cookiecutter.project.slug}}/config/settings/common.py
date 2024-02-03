@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """
 Django settings.
 
@@ -42,38 +41,34 @@ DJANGO_APPS = (
 
 THIRD_PARTY_APPS = (
     'crispy_forms',
+    'crispy_bootstrap4',
     'cms',
     'menus',
     'treebeard',
     'sekizai',
     'filer',
     'easy_thumbnails',
-    'mptt',
+    'djangocms_versioning',
+    'djangocms_alias',
+    'parler',
     'djangocms_text_ckeditor',
-    'djangocms_icon',
-    'djangocms_link',
-    'djangocms_file',
-    'djangocms_picture',
-    'djangocms_attributes_field',
-    'djangocms_video',
-    'djangocms_googlemap',
-    #'djangocms_snippet',
-    'djangocms_style',
-    'djangocms_bootstrap4',
-    'djangocms_bootstrap4.contrib.bootstrap4_alerts',
-    'djangocms_bootstrap4.contrib.bootstrap4_badge',
-    'djangocms_bootstrap4.contrib.bootstrap4_card',
-    'djangocms_bootstrap4.contrib.bootstrap4_carousel',
-    'djangocms_bootstrap4.contrib.bootstrap4_collapse',
-    'djangocms_bootstrap4.contrib.bootstrap4_content',
-    'djangocms_bootstrap4.contrib.bootstrap4_grid',
-    'djangocms_bootstrap4.contrib.bootstrap4_jumbotron',
-    'djangocms_bootstrap4.contrib.bootstrap4_link',
-    'djangocms_bootstrap4.contrib.bootstrap4_listgroup',
-    'djangocms_bootstrap4.contrib.bootstrap4_media',
-    'djangocms_bootstrap4.contrib.bootstrap4_picture',
-    'djangocms_bootstrap4.contrib.bootstrap4_tabs',
-    'djangocms_bootstrap4.contrib.bootstrap4_utilities',
+    'djangocms_frontend',
+    'djangocms_frontend.contrib.accordion',
+    'djangocms_frontend.contrib.alert',
+    'djangocms_frontend.contrib.badge',
+    'djangocms_frontend.contrib.card',
+    'djangocms_frontend.contrib.carousel',
+    'djangocms_frontend.contrib.collapse',
+    'djangocms_frontend.contrib.content',
+    'djangocms_frontend.contrib.grid',
+    'djangocms_frontend.contrib.jumbotron',
+    'djangocms_frontend.contrib.link',
+    'djangocms_frontend.contrib.listgroup',
+    'djangocms_frontend.contrib.media',
+    'djangocms_frontend.contrib.icon',
+    'djangocms_frontend.contrib.image',
+    'djangocms_frontend.contrib.tabs',
+    'djangocms_frontend.contrib.utilities',
 )
 
 # Apps specific for this project go here.
@@ -142,10 +137,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 # GENERAL CONFIGURATION
 # ------------------------------------------------------------------------------
-# Local time zone for this installation. Choices can be found here:
-# http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
-# although not all choices may be available on all operating systems.
-# In a Windows environment this must be set to your system time zone.
 TIME_ZONE = 'UTC'
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#language-code
@@ -153,20 +144,9 @@ LANGUAGE_CODE = 'en'
 
 LANGUAGES = [
     ('en', 'English'),
-    ('es', 'Spanish'),
     ('de', 'German'),
     ('fr', 'French'),
     ('it', 'Italian'),
-    ('pt', 'Portuguese'),
-    ('zh-hans', 'Simplified Chinese'),
-    ('zh-hant', 'Traditional Chinese'),
-    ('ja', 'Japanese'),
-    ('hi', 'Hindi'),
-    ('ar', 'Arabic'),
-    ('bn', 'Bengali'),
-    ('ru', 'Russian'),
-    ('vi', 'Vietnamese'),
-    ('ko', 'Korean'),
 ]
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#site-id
@@ -184,6 +164,10 @@ USE_L10N = True
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#use-tz
 USE_TZ = True
+
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
+ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['*'])
+
 
 # TEMPLATE CONFIGURATION
 # ------------------------------------------------------------------------------
@@ -210,11 +194,12 @@ TEMPLATES = [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
-                'django.template.context_processors.i18n',
-                'django.template.context_processors.media',
-                'django.template.context_processors.static',
-                'django.template.context_processors.tz',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
+                'django.template.context_processors.csrf',
+                'django.template.context_processors.tz',
+                'django.template.context_processors.i18n',
+                'django.template.context_processors.static',
                 'cms.context_processors.cms_settings',
                 'sekizai.context_processors.sekizai',
             ],
@@ -224,6 +209,7 @@ TEMPLATES = [
         },
     },
 ]
+
 
 # STATIC FILE CONFIGURATION
 # ------------------------------------------------------------------------------
@@ -245,6 +231,7 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
 
+
 # MEDIA CONFIGURATION
 # ------------------------------------------------------------------------------
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#media-root
@@ -252,6 +239,7 @@ MEDIA_ROOT = str(PROJ_DIR('media'))
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#media-url
 MEDIA_URL = '/media/'
+
 
 # URL Configuration
 # ------------------------------------------------------------------------------
@@ -311,3 +299,42 @@ CMS_TEMPLATES = [
 ]
 
 CMS_PERMISSION = True
+
+CMS_CONFIRM_VERSION4 = True
+
+CMS_LANGUAGES = {
+    1: [
+        {
+            'code': 'en',
+            'name': _('English'),
+            'fallbacks': ['de', 'fr'],
+            'public': True,
+            'hide_untranslated': True,
+            'redirect_on_fallback': False,
+        },
+        {
+            'code': 'de',
+            'name': _('German'),
+            'fallbacks': ['en', 'fr'],
+            'public': True,
+        },
+        {
+            'code': 'fr',
+            'name': _('French'),
+            'public': False,
+        },
+        {
+            'code': 'it',
+            'name': _('Italian'),
+            'public': True,
+            'fallbacks': ['en'],
+        },
+    ],
+    'default': {
+        'fallbacks': ['en', 'de', 'fr', 'it'],
+        'redirect_on_fallback': True,
+        'public': True,
+        'hide_untranslated': False,
+    }
+}
+

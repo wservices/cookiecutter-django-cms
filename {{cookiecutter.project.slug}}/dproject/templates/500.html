@@ -1,15 +1,29 @@
-{% raw %}{% extends "base.html" %}
-{% load i18n %}
+{% raw %}{% load static %}
 
-{% block title %}{% trans 'Server error (500)' %}{% endblock %}
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <title>Server Error 500</title>
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
 
-{% block content %}
-<div class="container">
-  <div class="row">
-    <div class="col-12">
-      <h1>{% trans 'Server Error <em>(500)</em>' %}</h1>
-      <p>{% trans "There's been an error. It's been reported to the site administrators via email and should be fixed shortly. Thanks for your patience." %}</p>
-    </div>
-  </div>
-</div>
-{% endblock content %}{% endraw %}
+    <!-- CSS -->
+    <link href="{% static 'bootstrap4/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Project specific CSS -->
+    <link href="{% static 'css/project.css' %}" rel="stylesheet">
+  </head>
+
+  <body class="d-flex flex-column">
+    <main role="main" id="page-content" class="content">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <h1>Server Error 500</h1>
+            <p>There's been an error. It's been reported to the site administrators via email and should be fixed shortly. Thanks for your patience.</p>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>{% endraw %}
