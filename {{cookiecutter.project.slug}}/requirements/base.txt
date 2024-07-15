@@ -4,7 +4,7 @@ chardet==5.2.0
 charset-normalizer==3.3.2
 crispy-bootstrap4==2023.1
 cssselect2==0.7.0
-Django==4.2.11
+Django==4.2.14
 django-classy-tags==4.1.0
 django-cms==4.1.0
 django-environ==0.11.2
@@ -26,7 +26,7 @@ lxml==5.1.0
 mysqlclient==2.2.1
 olefile==0.47
 packaging==23.2
-pillow==10.2.0
+pillow==10.4.0
 psycopg2-binary==2.9.9
 python-dateutil==2.8.2
 reportlab==4.0.9
