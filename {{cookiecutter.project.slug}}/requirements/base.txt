@@ -8,7 +8,7 @@ Django==4.2.16
 django-classy-tags==4.1.0
 django-cms==4.1.4
 django-environ==0.11.2
-django-filer==3.1.1
+django-filer==3.3.0
 django-formtools==2.5.1
 django-polymorphic==3.1.0
 django-recaptcha==4.0.0
