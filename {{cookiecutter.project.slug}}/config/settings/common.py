@@ -52,6 +52,7 @@ THIRD_PARTY_APPS = (
     'djangocms_alias',
     'parler',
     'djangocms_text_ckeditor',
+    'djangocms_link',
     'djangocms_frontend',
     'djangocms_frontend.contrib.accordion',
     'djangocms_frontend.contrib.alert',
