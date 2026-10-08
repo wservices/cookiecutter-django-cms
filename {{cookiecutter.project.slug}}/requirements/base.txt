@@ -4,7 +4,7 @@ chardet==7.4.3
 charset-normalizer==3.4.7
 crispy-bootstrap4==2026.2
 cssselect2==0.9.0
-Django==5.2.14
+Django==5.2.17
 django-classy-tags==4.1.0
 django-cms==5.0.6
 django-crispy-forms==2.6
