@@ -33,7 +33,7 @@ lxml==6.1.0
 mysqlclient==2.2.8
 olefile==0.47
 packaging==26.2
-pillow==12.2.0
+pillow==13.0.0
 psycopg2-binary==2.9.12
 python-dateutil==2.8.2
 reportlab==4.5.0
