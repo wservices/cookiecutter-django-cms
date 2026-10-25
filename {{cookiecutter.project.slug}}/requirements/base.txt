@@ -6,7 +6,7 @@ crispy-bootstrap4==2026.2
 cssselect2==0.9.0
 Django==5.2.17
 django-classy-tags==4.1.0
-django-cms==5.0.6
+django-cms==5.0.9
 django-crispy-forms==2.6
 django-entangled==0.7
 django-environ==0.13.0
