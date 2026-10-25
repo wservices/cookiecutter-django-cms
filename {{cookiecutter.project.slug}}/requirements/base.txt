@@ -1,5 +1,5 @@
 asgiref==3.11.1
-certifi==2026.4.22
+certifi==2026.10.19
 chardet==7.4.3
 charset-normalizer==3.4.7
 crispy-bootstrap4==2026.2
