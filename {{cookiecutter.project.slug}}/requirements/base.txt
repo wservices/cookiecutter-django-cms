@@ -26,7 +26,7 @@ djangocms-attributes-field==4.1.2
 djangocms-frontend==2.4.0
 djangocms-link==5.1.1
 djangocms-text-ckeditor==5.1.7
-djangocms-versioning==2.5.1
+djangocms-versioning==2.6.1
 easy-thumbnails==2.10.1
 html5lib==1.1
 lxml==6.1.0
