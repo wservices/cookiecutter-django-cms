@@ -10,7 +10,7 @@ django-cms==5.0.9
 django-crispy-forms==2.6
 django-entangled==0.7
 django-environ==0.13.0
-django-filer==3.4.4
+django-filer==3.5.0
 django-formtools==2.5.1
 django-fsm==3.0.1
 django-fsm-2==4.2.4
